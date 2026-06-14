@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ayush Sanj — Portfolio
 
-## Getting Started
+Personal portfolio of Ayush Sanj, Frontend & Mobile Engineer. Built with a focus on performance, motion, and a distinct visual identity.
 
-First, run the development server:
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 + TypeScript |
+| Styling | Tailwind CSS v4 + CSS custom properties |
+| Animations | GSAP 3 |
+| 3D / WebGL | Three.js + raw WebGL shaders |
+| Smooth scroll | Lenis |
+| Fonts | Instrument Serif · Bricolage Grotesque · DM Mono |
+| Visitor counter | Upstash Redis (via API route) |
+| AI assistance | Claude (Anthropic) |
+| Deployment | Vercel |
+
+## Features
+
+- **WebGL shader background** — fractional Brownian motion noise, fades in on load
+- **3D shape carousel** — Six wireframe shapes (geodesic, torus knot, ring, low-poly sphere, pyramid, diamond) cycling every 3 seconds via Three.js
+- **Custom cursor** — dot + ring with magnetic pull on buttons; touch equivalent on mobile
+- **Lenis smooth scroll** — desktop only, native scroll preserved on touch devices
+- **Visitor counter** — live count stored in Upstash Redis, incremented on each visit
+- **Responsive** — mobile-first layout, floating code tokens hidden on small screens
+- **Custom `<AS/>` favicon** — SVG icon in brand accent colour
+
+## Pages
+
+- `/` — Hero with WebGL background, 3D shape, built-with strip, visitor count
+- `/work` — Work experience
+- `/projects` — Side projects
+- `/skills` — Technical skills
+- `/about` — About me
+- `/contact` — Contact links
+- `/resume` — Printable resume
+
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # Dev server → http://localhost:3000
+npm run build    # Production build
+npm run start    # Serve production build
+npm run lint     # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Design Tokens
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```css
+--bg:      #0d0c09   /* page background */
+--surface: #141310   /* card background */
+--accent:  #c8f13f   /* brand yellow-green */
+--text:    #ede8da   /* primary text */
+--soft:    #898060   /* secondary text */
+--muted:   #4a4535   /* dimmed text */
+--max:     840px     /* content max-width */
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Visitor Counter Setup (Vercel)
 
-## Learn More
+After deploying, activate the live visitor counter:
 
-To learn more about Next.js, take a look at the following resources:
+1. Vercel dashboard → your project → **Storage** → **Create Database** → **Upstash Redis**
+2. Connect to project — Vercel auto-injects `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
+3. Redeploy — counter starts from that point
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Push to GitHub, import on [vercel.com](https://vercel.com), connect your Hostinger domain via DNS:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **A record** → `@` → `76.76.21.21`
+- **CNAME** → `www` → `cname.vercel-dns.com`

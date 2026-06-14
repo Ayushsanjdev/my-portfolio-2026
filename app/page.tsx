@@ -5,7 +5,7 @@ import FloatingCode from "@/components/FloatingCode";
 import VisitorCounter from "@/components/VisitorCounter";
 import PolyhedronLoader from "@/components/PolyhedronLoader";
 
-const stack = ["Next.js", "React", "TypeScript", "GSAP", "Three.js", "Claude"];
+const stack = ["Next.js", "React", "TypeScript", "GSAP", "Three.js", "Lenis", "Claude"];
 
 const corners: React.CSSProperties[] = [
   {
