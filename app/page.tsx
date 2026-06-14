@@ -3,8 +3,9 @@ import WebGLHero from "@/components/WebGLHero";
 import HeroText from "@/components/HeroText";
 import FloatingCode from "@/components/FloatingCode";
 import VisitorCounter from "@/components/VisitorCounter";
+import PolyhedronLoader from "@/components/PolyhedronLoader";
 
-const stack = ["Next.js", "React", "TypeScript", "GSAP", "Three.js"];
+const stack = ["Next.js", "React", "TypeScript", "GSAP", "Three.js", "Claude"];
 
 const corners: React.CSSProperties[] = [
   {
@@ -52,6 +53,8 @@ export default function Home() {
           position: "relative",
         }}
       >
+          <PolyhedronLoader />
+
           {/* Corner crosshairs */}
           {corners.map((s, i) => (
             <div

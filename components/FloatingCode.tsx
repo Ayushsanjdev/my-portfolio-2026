@@ -66,6 +66,7 @@ export default function FloatingCode() {
   return (
     <div
       aria-hidden="true"
+      className="floating-code"
       style={{
         position: 'fixed',
         inset: 0,

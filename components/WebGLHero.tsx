@@ -10,6 +10,7 @@ const VERT = `
 const FRAG = `
   precision mediump float;
   uniform float u_time;
+  uniform float u_fade;
   uniform vec2  u_res;
 
   float hash(vec2 p) {
@@ -45,7 +46,7 @@ const FRAG = `
     col = mix(col, accent * 1.2, clamp(length(q) * 0.5, 0.0, 0.6));
 
     float a = clamp(f * 0.85 + length(q) * 0.18, 0.0, 0.62);
-    gl_FragColor = vec4(col, a);
+    gl_FragColor = vec4(col, a * u_fade);
   }
 `;
 
@@ -88,6 +89,7 @@ export default function WebGLHero() {
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 
     const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uFade = gl.getUniformLocation(prog, 'u_fade');
     const uRes  = gl.getUniformLocation(prog, 'u_res');
 
     const resize = () => {
@@ -111,7 +113,11 @@ export default function WebGLHero() {
       last = now;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform1f(uTime, (now - start) / 1000);
+      const elapsed = (now - start) / 1000;
+      const t = Math.min(1, elapsed / 0.5);
+      const fade = t * t * (3 - 2 * t); // smoothstep ease-out
+      gl.uniform1f(uTime, elapsed);
+      gl.uniform1f(uFade, fade);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };

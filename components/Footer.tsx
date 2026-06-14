@@ -1,14 +1,6 @@
 export default function Footer() {
   return (
     <footer style={{ maxWidth: 'var(--max)', margin: '0 auto', padding: '24px var(--pad)' }}>
-      <p style={{
-        fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)',
-        textAlign: 'center', letterSpacing: '0.08em', marginBottom: 20,
-        fontStyle: 'italic',
-      }}>
-        yes, an AI helped. no, it doesn&apos;t matter.
-      </p>
-
       {/* Decorative SVG rule with accent diamond */}
       <svg
         aria-hidden="true"

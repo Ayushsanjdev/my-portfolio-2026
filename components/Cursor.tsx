@@ -5,7 +5,42 @@ import gsap from 'gsap';
 
 export default function Cursor() {
   useEffect(() => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    if (!hasHover) {
+      // Touch-only devices: show dot+ring on finger touch
+      const dot  = document.getElementById('cursor-dot')!;
+      const ring = document.getElementById('cursor-ring')!;
+      if (!dot || !ring) return;
+      gsap.set([dot, ring], { opacity: 0 });
+
+      const onTouchStart = (e: TouchEvent) => {
+        const t = e.touches[0];
+        gsap.set(dot, { x: t.clientX, y: t.clientY });
+        gsap.set(ring, { x: t.clientX, y: t.clientY });
+        gsap.to([dot, ring], { opacity: 1, duration: 0.15 });
+        dot.classList.add('hovered');
+        ring.classList.add('hovered');
+      };
+      const onTouchMove = (e: TouchEvent) => {
+        const t = e.touches[0];
+        gsap.set(dot,  { x: t.clientX, y: t.clientY });
+        gsap.set(ring, { x: t.clientX, y: t.clientY });
+      };
+      const onTouchEnd = () => {
+        dot.classList.remove('hovered');
+        ring.classList.remove('hovered');
+        gsap.to([dot, ring], { opacity: 0, duration: 0.25 });
+      };
+
+      document.addEventListener('touchstart', onTouchStart, { passive: true });
+      document.addEventListener('touchmove',  onTouchMove,  { passive: true });
+      document.addEventListener('touchend',   onTouchEnd);
+      return () => {
+        document.removeEventListener('touchstart', onTouchStart);
+        document.removeEventListener('touchmove',  onTouchMove);
+        document.removeEventListener('touchend',   onTouchEnd);
+      };
+    }
 
     const dot  = document.getElementById('cursor-dot')!;
     const ring = document.getElementById('cursor-ring')!;

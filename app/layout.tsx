@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Cursor from '@/components/Cursor';
 import Grain from '@/components/Grain';
 import LoadingScreen from '@/components/LoadingScreen';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div aria-hidden="true" style={{ position: 'fixed', inset: 0, background: 'var(--bg)', zIndex: -100 }} />
         <div id="cursor-dot" aria-hidden="true" />
         <div id="cursor-ring" aria-hidden="true" />
+        <SmoothScroll />
         <LoadingScreen />
         <Cursor />
         <Grain />
