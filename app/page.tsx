@@ -5,7 +5,15 @@ import FloatingCode from "@/components/FloatingCode";
 import VisitorCounter from "@/components/VisitorCounter";
 import PolyhedronLoader from "@/components/PolyhedronLoader";
 
-const stack = ["Next.js", "React", "TypeScript", "GSAP", "Three.js", "Lenis", "Claude"];
+const stack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "GSAP",
+  "Three.js",
+  "Lenis",
+  "Claude",
+];
 
 const corners: React.CSSProperties[] = [
   {
@@ -53,117 +61,148 @@ export default function Home() {
           position: "relative",
         }}
       >
-          <PolyhedronLoader />
+        <PolyhedronLoader />
 
-          {/* Corner crosshairs */}
-          {corners.map((s, i) => (
-            <div
-              key={i}
-              aria-hidden="true"
-              style={{ position: "absolute", width: 14, height: 14, ...s }}
-            />
-          ))}
-
-          <p className="hero-tag">
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "var(--accent)",
-                flexShrink: 0,
-                display: "inline-block",
-                animation: "blink 2.5s ease infinite",
-              }}
-            />
-            Open to work · Frontend &amp; Mobile Engineer
-          </p>
-
-          <HeroText />
-
+        {/* Corner crosshairs */}
+        {corners.map((s, i) => (
           <div
-            className="hero-meta"
+            key={i}
+            aria-hidden="true"
+            style={{ position: "absolute", width: 14, height: 14, ...s }}
+          />
+        ))}
+
+        <p className="hero-tag">
+          <span
             style={{
-              marginBottom: "clamp(32px, 5vw, 52px)",
-              animation: "fadeUp 0.5s ease 0.65s both",
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "var(--accent)",
+              flexShrink: 0,
+              display: "inline-block",
+              animation: "blink 2.5s ease infinite",
+            }}
+          />
+          Open to work · Frontend &amp; Mobile Engineer
+        </p>
+
+        <HeroText />
+
+        <div
+          className="hero-meta"
+          style={{
+            marginBottom: "clamp(32px, 5vw, 52px)",
+            animation: "fadeUp 0.5s ease 0.65s both",
+          }}
+        >
+          {[
+            "India",
+            "·",
+            "3+ years React & React Native",
+            "·",
+            "TypeScript",
+          ].map((item, i) => (
+            <span
+              key={i}
+              className={item === "·" ? "hero-sep" : undefined}
+              style={{
+                fontSize: 15,
+                color: item === "·" ? "var(--muted)" : "var(--soft)",
+              }}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="hero-cta"
+          style={{
+            display: "flex",
+            gap: 12,
+            flexWrap: "wrap",
+            animation: "fadeUp 0.5s ease 0.82s both",
+          }}
+        >
+          <Link href="/work" className="btn-primary" data-magnetic>
+            View Work
+          </Link>
+          <Link href="/resume" className="btn-outline" data-magnetic>
+            Resume →
+          </Link>
+          <Link href="/contact" className="btn-outline" data-magnetic>
+            Contact
+          </Link>
+        </div>
+
+        <div
+          style={{
+            borderTop: "1px solid var(--border)",
+            marginTop: "clamp(28px, 4vw, 44px)",
+            paddingTop: 14,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 10,
+            animation: "fadeUp 0.5s ease 0.96s both",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              flexWrap: "wrap",
             }}
           >
-            {[
-              "India",
-              "·",
-              "3+ years React & React Native",
-              "·",
-              "TypeScript",
-            ].map((item, i) => (
+            <span
+              style={{
+                color: "var(--muted)",
+                fontSize: 11,
+                fontFamily: "var(--font-mono)",
+                marginRight: 2,
+              }}
+            >
+              built with
+            </span>
+            {stack.map((tool, i) => (
               <span
-                key={i}
-                className={item === "·" ? "hero-sep" : undefined}
-                style={{
-                  fontSize: 15,
-                  color: item === "·" ? "var(--muted)" : "var(--soft)",
-                }}
+                key={tool}
+                style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
-                {item}
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontFamily: "var(--font-mono)",
+                    color: i === 0 ? "var(--accent)" : "var(--soft)",
+                  }}
+                >
+                  {tool}
+                </span>
+                {i < stack.length - 1 && (
+                  <span style={{ color: "var(--muted)", fontSize: 10 }}>·</span>
+                )}
               </span>
             ))}
           </div>
-
-          <div
-            className="hero-cta"
-            style={{
-              display: "flex",
-              gap: 12,
-              flexWrap: "wrap",
-              animation: "fadeUp 0.5s ease 0.82s both",
-            }}
-          >
-            <Link href="/work" className="btn-primary" data-magnetic>
-              View Work
-            </Link>
-            <Link href="/resume" className="btn-outline" data-magnetic>
-              Resume →
-            </Link>
-            <Link href="/contact" className="btn-outline" data-magnetic>
-              Contact
-            </Link>
-          </div>
-
-          <div
-            style={{
-              borderTop: "1px solid var(--border)",
-              marginTop: "clamp(28px, 4vw, 44px)",
-              paddingTop: 14,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: 10,
-              animation: "fadeUp 0.5s ease 0.96s both",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-              <span style={{ color: "var(--muted)", fontSize: 11, fontFamily: "var(--font-mono)", marginRight: 2 }}>
-                built with
-              </span>
-              {stack.map((tool, i) => (
-                <span key={tool} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span
-                    style={{
-                      fontSize: 12,
-                      fontFamily: "var(--font-mono)",
-                      color: i === 0 ? "var(--accent)" : "var(--soft)",
-                    }}
-                  >
-                    {tool}
-                  </span>
-                  {i < stack.length - 1 && (
-                    <span style={{ color: "var(--muted)", fontSize: 10 }}>·</span>
-                  )}
-                </span>
-              ))}
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span
+              style={{
+                color: "var(--muted)",
+                fontSize: 11,
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              published Jun 14th 2026
+            </span>
+            <span style={{ color: "var(--muted)", fontSize: 10, opacity: 0.5 }}>
+              ·
+            </span>
             <VisitorCounter />
           </div>
+        </div>
       </div>
     </>
   );
