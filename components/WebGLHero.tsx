@@ -41,12 +41,13 @@ const FRAG = `
     float f = fbm(st + r);
 
     vec3 accent  = vec3(0.784, 0.945, 0.247);
-    vec3 midtone = vec3(0.18,  0.32,  0.08);
-    vec3 col = mix(midtone, accent, clamp(f * 2.2 - 0.3, 0.0, 1.0));
-    col = mix(col, accent * 1.2, clamp(length(q) * 0.5, 0.0, 0.6));
+    vec3 midtone = vec3(0.10,  0.18,  0.04);
+    vec3 col = mix(midtone, accent, clamp(f * 1.6 - 0.5, 0.0, 1.0));
+    col = mix(col, accent * 0.9, clamp(length(q) * 0.3, 0.0, 0.35));
 
-    float a = clamp(f * 0.85 + length(q) * 0.18, 0.0, 0.62);
-    gl_FragColor = vec4(col, a * u_fade);
+    float a = clamp(f * 0.5 + length(q) * 0.08, 0.0, 0.22) * u_fade;
+    // premultiplied alpha — required for correct compositing in Chrome
+    gl_FragColor = vec4(col * a, a);
   }
 `;
 
@@ -67,7 +68,7 @@ export default function WebGLHero() {
     // low-power: forces macOS to use integrated GPU instead of discrete Radeon
     const gl = canvas.getContext('webgl', {
       alpha: true,
-      premultipliedAlpha: false,
+      premultipliedAlpha: true,
       powerPreference: 'low-power',
       antialias: false,
       depth: false,
@@ -102,7 +103,7 @@ export default function WebGLHero() {
     ro.observe(document.documentElement);
 
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     // 24fps cap — animation is slow-moving so this is visually lossless
     const TARGET_MS = 1000 / 24;
