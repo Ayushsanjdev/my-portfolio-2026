@@ -5,7 +5,6 @@ const contactLinks = [
   { k: 'Email',    v: 'ayushsanjpro@gmail.com',   href: 'mailto:ayushsanjpro@gmail.com',    external: false },
   { k: 'LinkedIn', v: 'linkedin.com/in/ayushsanj', href: 'https://linkedin.com/in/ayushsanj', external: true },
   { k: 'GitHub',   v: 'github.com/ayushsanjdev',   href: 'https://github.com/ayushsanjdev',  external: true },
-  { k: 'Phone',    v: '+91 859 572 0727',           href: 'tel:+918595720727',                external: false },
 ];
 
 function ContactRow({ k, v, href, external }: { k: string; v: string; href: string; external: boolean }) {

@@ -111,7 +111,6 @@ export default function Resume() {
       }}>
         {[
           { label: 'India', href: null },
-          { label: '+91 859 572 0727', href: 'tel:+918595720727' },
           { label: 'ayushsanjpro@gmail.com', href: 'mailto:ayushsanjpro@gmail.com' },
           { label: 'github.com/ayushsanjdev', href: 'https://github.com/ayushsanjdev' },
           { label: 'linkedin.com/in/ayushsanj', href: 'https://linkedin.com/in/ayushsanj' },
