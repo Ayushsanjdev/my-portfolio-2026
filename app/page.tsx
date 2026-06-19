@@ -1,6 +1,7 @@
 import Link from "next/link";
 import WebGLHero from "@/components/WebGLHero";
-import HeroText from "@/components/HeroText";
+import HeroParticles from "@/components/HeroParticles";
+import HeroReveal from "@/components/HeroReveal";
 import FloatingCode from "@/components/FloatingCode";
 import VisitorCounter from "@/components/VisitorCounter";
 import PolyhedronLoader from "@/components/PolyhedronLoader";
@@ -62,6 +63,7 @@ export default function Home() {
         }}
       >
         <PolyhedronLoader />
+        <HeroReveal />
 
         {/* Corner crosshairs */}
         {corners.map((s, i) => (
@@ -72,7 +74,7 @@ export default function Home() {
           />
         ))}
 
-        <p className="hero-tag">
+        <p className="hero-tag" data-hero="tag" style={{ opacity: 0 }}>
           <span
             style={{
               width: 6,
@@ -84,16 +86,17 @@ export default function Home() {
               animation: "blink 2.5s ease infinite",
             }}
           />
-          Open to work · Frontend &amp; Mobile Engineer
+          <span data-tag-text>Open to work · Frontend &amp; Mobile Engineer</span>
         </p>
 
-        <HeroText />
+        <HeroParticles />
 
         <div
           className="hero-meta"
+          data-hero="meta"
           style={{
             marginBottom: "clamp(32px, 5vw, 52px)",
-            animation: "fadeUp 0.5s ease 0.65s both",
+            opacity: 0,
           }}
         >
           {[
@@ -118,25 +121,27 @@ export default function Home() {
 
         <div
           className="hero-cta"
+          data-hero="cta"
           style={{
             display: "flex",
             gap: 12,
             flexWrap: "wrap",
-            animation: "fadeUp 0.5s ease 0.82s both",
+            opacity: 0,
           }}
         >
-          <Link href="/work" className="btn-primary" data-magnetic>
+          <Link href="/work" className="btn-primary">
             View Work
           </Link>
-          <Link href="/resume" className="btn-outline" data-magnetic>
+          <Link href="/resume" className="btn-outline">
             Resume →
           </Link>
-          <Link href="/contact" className="btn-outline" data-magnetic>
+          <Link href="/contact" className="btn-outline">
             Contact
           </Link>
         </div>
 
         <div
+          data-hero="strip"
           style={{
             borderTop: "1px solid var(--border)",
             marginTop: "clamp(28px, 4vw, 44px)",
@@ -146,7 +151,7 @@ export default function Home() {
             justifyContent: "space-between",
             flexWrap: "wrap",
             gap: 10,
-            animation: "fadeUp 0.5s ease 0.96s both",
+            opacity: 0,
           }}
         >
           <div

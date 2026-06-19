@@ -5,8 +5,8 @@
   --surface:   #141310;
   --border:    rgba(255,255,255,0.07);
   --text:      #ede8da;
-  --muted:     #4a4535;
-  --soft:      #898060;
+  --muted:     #857c6a;
+  --soft:      #9e9274;
   --accent:    #c8f13f;
   --accent-bg: rgba(200,241,63,0.07);
 
@@ -143,6 +143,7 @@ a { color: inherit; text-decoration: none; }
 
 .contact-arrow { color: var(--muted); font-size: 16px; flex-shrink: 0; transition: color 0.2s; }
 .contact-row:hover .contact-arrow { color: var(--accent); }
+.contact-row:hover .contact-icon { color: var(--accent); }
 
 /* ─── Hero ─────────────────────────────────────────────────── */
 
@@ -150,7 +151,6 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono); font-size: 12px; color: var(--muted);
   letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px;
   display: flex; align-items: center; gap: 10px;
-  animation: fadeUp 0.5s ease 0.15s both;
 }
 
 .hero-meta {

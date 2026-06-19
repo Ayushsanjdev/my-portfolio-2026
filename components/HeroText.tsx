@@ -20,10 +20,11 @@ export default function HeroText() {
 
     const charsA = splitLine(lineA.current);
     const charsB = splitLine(lineB.current);
+    const allChars = [...charsA, ...charsB];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     gsap.fromTo(
-      [...charsA, ...charsB],
+      allChars,
       { y: 44, opacity: 0, filter: 'blur(10px)' },
       {
         y: 0, opacity: 1, filter: 'blur(0px)',
@@ -31,6 +32,19 @@ export default function HeroText() {
         stagger: reduced ? 0 : 0.038,
         ease: 'power3.out',
         delay: 0.25,
+        onComplete: () => {
+          if (reduced) return;
+          allChars.forEach((char, i) => {
+            gsap.to(char, {
+              y: -7,
+              duration: 1.6,
+              ease: 'sine.inOut',
+              repeat: -1,
+              yoyo: true,
+              delay: i * 0.09,
+            });
+          });
+        },
       }
     );
   }, []);
@@ -42,6 +56,7 @@ export default function HeroText() {
       fontWeight: 700, lineHeight: 0.88,
       letterSpacing: '-0.01em', marginBottom: 'clamp(24px, 4vw, 44px)',
       fontStyle: 'italic',
+      userSelect: 'none',
     }}>
       <span ref={lineA} style={{ display: 'block', color: 'var(--text)' }}>
         Ayush

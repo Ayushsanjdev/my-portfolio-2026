@@ -9,6 +9,7 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
   { href: "/projects", label: "Projects" },
+  { href: "/blogs", label: "Blogs" },
   { href: "/skills", label: "Skills" },
   { href: "/contact", label: "Contact" },
   { href: "/resume", label: "Resume" },
@@ -122,7 +123,7 @@ export default function Nav() {
               padding: 0,
             }}
           >
-            {links.slice(0, 5).map(({ href, label }) => (
+            {links.slice(0, 6).map(({ href, label }) => (
               <li key={href}>
                 <Link
                   href={href}
@@ -130,6 +131,8 @@ export default function Nav() {
                   style={{
                     fontSize: 13,
                     fontFamily: "var(--font-body)",
+                    fontWeight: 300,
+                    letterSpacing: "0.06em",
                     ...(pathname === href && { color: "var(--text)" }),
                   }}
                 >

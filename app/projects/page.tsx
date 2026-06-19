@@ -26,19 +26,19 @@ export default function Projects() {
       {projects.map(({ name, url, urlLabel, contribution, delay }) => (
         <article key={name}>
           <RevealBlock delay={delay} style={{ padding: '40px 0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap' }}>
-              <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20 }}>
+              <div style={{ minWidth: 0 }}>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 8 }}>
                   Contributor
                 </p>
-                <div style={{ fontFamily: 'var(--font-disp)', fontSize: 'clamp(32px,5vw,52px)', fontWeight: 600, fontStyle: 'italic', color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 14 }}>
+                <div style={{ fontFamily: 'var(--font-disp)', fontSize: 'clamp(28px,5vw,52px)', fontWeight: 600, fontStyle: 'italic', color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 14 }}>
                   {name}
                 </div>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--soft)', letterSpacing: '0.02em' }}>
                   {contribution}
                 </p>
               </div>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="project-link" style={{ marginTop: 6 }}>
+              <a href={url} target="_blank" rel="noopener noreferrer" className="project-link" style={{ flexShrink: 0 }}>
                 {urlLabel}
               </a>
             </div>

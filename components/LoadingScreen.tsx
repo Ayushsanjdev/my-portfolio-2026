@@ -40,6 +40,8 @@ export default function LoadingScreen() {
     const tl = gsap.timeline({
       onComplete: () => {
         blinkTween.kill();
+        (window as any).__loaderDone = true;
+        window.dispatchEvent(new CustomEvent('loader:done'));
         setVisible(false);
       },
     });

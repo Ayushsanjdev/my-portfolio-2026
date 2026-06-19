@@ -7,10 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev      # Start dev server on http://localhost:3000
-npm run build    # Production build
-npm run start    # Serve production build
-npm run lint     # Run ESLint
+bun dev      # Start dev server on http://localhost:3000
+bun build    # Production build
+bun start    # Serve production build
+bun lint     # Run ESLint
 ```
 
 No test framework is configured.
