@@ -13,28 +13,19 @@ const skillGroups = [
 export default function Skills() {
   return (
     <div className="page">
-      <PageHeader label="Skills" title="What I work with." />
-      <RevealBlock delay={0.05}>
-        {skillGroups.map(({ label, items }, i) => (
-          <div key={label} style={{
-            display: 'flex', gap: 24, padding: '18px 0',
-            borderTop: i === 0 ? '1px solid var(--border)' : undefined,
-            borderBottom: '1px solid var(--border)',
-            alignItems: 'baseline',
-          }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', letterSpacing: '0.16em', textTransform: 'uppercase', minWidth: 120, flexShrink: 0, paddingTop: 3 }}>
-              {label}
-            </span>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 20px' }}>
+      <PageHeader label="05 / Skills" title="What I work with." />
+      <div className="detail-list">
+        {skillGroups.map(({ label, items }) => (
+          <RevealBlock delay={0.05} className="skill-row" key={label}>
+            <span className="detail-label">{label}</span>
+            <div className="skill-items">
               {items.map(({ t, hi }) => (
-                <span key={t} style={{ fontSize: 14, color: hi ? 'var(--text)' : 'var(--soft)', cursor: 'default' }}>
-                  {t}
-                </span>
+                <span className={hi ? 'skill-item skill-item--primary' : 'skill-item'} key={t}>{t}</span>
               ))}
             </div>
-          </div>
+          </RevealBlock>
         ))}
-      </RevealBlock>
+      </div>
     </div>
   );
 }

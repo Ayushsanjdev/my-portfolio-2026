@@ -45,8 +45,7 @@ export default function HeroParticles() {
       const lineGap  = fontSize * 0.92;
       const H        = Math.ceil(fontSize * 2.1);
 
-      // Sample at 2× scale so thin Instrument Serif strokes produce
-      // enough pixels even at weight 400. Coordinates are halved back
+      // Sample at 2× scale so the letterforms stay crisp. Coordinates are halved back
       // to screen space after sampling.
       const SCALE    = 2;
       const SW       = W    * SCALE;
@@ -59,8 +58,7 @@ export default function HeroParticles() {
       off.height = SH;
       const ctx  = off.getContext('2d')!;
       ctx.fillStyle    = '#fff';
-      // Weight 400 — the only weight loaded for Instrument Serif
-      ctx.font         = `italic 400 ${fontSize * SCALE}px "Instrument Serif", Georgia, serif`;
+      ctx.font         = `600 ${fontSize * SCALE}px "Bricolage Grotesque", system-ui, sans-serif`;
       ctx.textBaseline = 'alphabetic';
       ctx.fillText('Ayush', 0, lineGap * SCALE);
       ctx.fillText('Sanj',  0, (lineGap + fontSize * 0.97) * SCALE);

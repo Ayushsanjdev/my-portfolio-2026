@@ -2,13 +2,7 @@ import PrintButton from '@/components/PrintButton';
 
 function SectionHead({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{
-      fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)',
-      letterSpacing: '0.22em', textTransform: 'uppercase',
-      borderBottom: '1px solid var(--border)', paddingBottom: 10, marginBottom: 24,
-    }}>
-      {children}
-    </div>
+    <h2 className="resume-section-head">{children}</h2>
   );
 }
 
@@ -83,6 +77,7 @@ const education = [
 export default function Resume() {
   return (
     <div className="resume-wrap">
+      <p className="section-index resume-index">07 / Résumé</p>
       {/* Header */}
       <div style={{
         display: 'flex', justifyContent: 'space-between',
@@ -90,13 +85,8 @@ export default function Resume() {
         animation: 'fadeUp 0.5s ease 0.1s both',
       }}>
         <div>
-          <div style={{
-            fontFamily: 'var(--font-disp)', fontSize: 'clamp(32px,5vw,48px)',
-            fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 6,
-          }}>
-            Ayush Sanj
-          </div>
-          <div style={{ fontSize: 15, color: 'var(--soft)' }}>
+          <h1 className="resume-name">Ayush Sanj<span>.</span></h1>
+          <div style={{ fontSize: 16, color: 'var(--soft)' }}>
             Frontend &amp; Mobile Engineer
           </div>
         </div>

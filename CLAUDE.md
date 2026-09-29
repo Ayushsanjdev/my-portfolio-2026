@@ -47,8 +47,8 @@ All styling uses **inline `style` props with CSS custom properties** — not Tai
 | `--nav-h` | `52px` | Nav height offset |
 
 **Font variables:**
-- `--font-body`: Bricolage Grotesque (sans-serif)
-- `--font-disp`: Instrument Serif (display/headings, used italic + large)
-- `--font-mono`: DM Mono
+- `--font-body`: Bricolage Grotesque for page copy and headings
+- `--font-disp`: compatibility alias for `--font-body`
+- `--font-mono`: DM Mono for compact metadata and technical labels
 
 **Animations:** `fadeUp` and `blink` keyframes are defined globally. Use `animation: 'fadeUp 0.Xs ease Ys both'` with staggered delays for entrance sequences. Pages use `'use client'` when they need hover state or event handlers inline.

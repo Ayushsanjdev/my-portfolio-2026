@@ -25,53 +25,24 @@ const blogs: { name: string; url: string; description: string; delay: number }[]
 export default function Blogs() {
   return (
     <div className="page">
-      <PageHeader label="Writing" title="Thoughts I've put to paper." />
-      <div style={{ height: 1, background: 'var(--border)' }} />
+      <PageHeader label="04 / Writing" title="Thoughts I've put to paper." />
       {blogs.length === 0 ? (
-        <RevealBlock delay={0} style={{ padding: '48px 0' }}>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--muted)', letterSpacing: '0.06em' }}>
-            Coming soon.
-          </p>
-        </RevealBlock>
+        <p className="empty-note">Coming soon.</p>
       ) : (
-        blogs.map(({ name, url, description, delay }) => (
-          <article key={name}>
-            <RevealBlock delay={delay} style={{ padding: '40px 0' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 20 }}>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{
-                    fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)',
-                    letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 8,
-                  }}>
-                    Blog Post
-                  </p>
-                  <div style={{
-                    fontFamily: 'var(--font-disp)', fontSize: 'clamp(22px,3vw,32px)',
-                    fontWeight: 600, fontStyle: 'italic', color: 'var(--text)',
-                    letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 14,
-                  }}>
-                    {name}
-                  </div>
-                  {description && (
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--soft)', letterSpacing: '0.02em' }}>
-                      {description}
-                    </p>
-                  )}
+        <div className="editorial-list">
+          {blogs.map(({ name, url, description, delay }, index) => (
+            <article className="editorial-row editorial-row--writing" key={name}>
+              <RevealBlock delay={delay} className="editorial-row-inner">
+                <span className="editorial-number">{String(index + 1).padStart(2, '0')}</span>
+                <div className="editorial-main">
+                  <p className="editorial-kicker">Article</p>
+                  <h2><a href={url} target="_blank" rel="noopener noreferrer">{name}<span aria-hidden="true">↗</span></a></h2>
                 </div>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link"
-                  style={{ marginTop: 6, flexShrink: 0 }}
-                >
-                  Read ↗
-                </a>
-              </div>
-            </RevealBlock>
-            <div style={{ height: 1, background: 'var(--border)' }} />
-          </article>
-        ))
+                <div className="editorial-aside"><p>{description}</p><span>Read article ↗</span></div>
+              </RevealBlock>
+            </article>
+          ))}
+        </div>
       )}
     </div>
   );

@@ -3,6 +3,7 @@ import RevealBlock from '@/components/RevealBlock';
 
 const projects = [
   {
+    number: '01',
     name: 'RSVP',
     url: 'https://rsvp.kim',
     urlLabel: 'rsvp.kim ↗',
@@ -10,6 +11,7 @@ const projects = [
     delay: 0,
   },
   {
+    number: '02',
     name: 'Evaltech',
     url: 'https://evaltech.ai',
     urlLabel: 'evaltech.ai ↗',
@@ -20,32 +22,27 @@ const projects = [
 
 export default function Projects() {
   return (
-    <div className="page">
-      <PageHeader label="Projects" title="Things I've contributed to." />
-      <div style={{ height: 1, background: 'var(--border)' }} />
-      {projects.map(({ name, url, urlLabel, contribution, delay }) => (
-        <article key={name}>
-          <RevealBlock delay={delay} style={{ padding: '40px 0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20 }}>
-              <div style={{ minWidth: 0 }}>
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 8 }}>
-                  Contributor
-                </p>
-                <div style={{ fontFamily: 'var(--font-disp)', fontSize: 'clamp(28px,5vw,52px)', fontWeight: 600, fontStyle: 'italic', color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 14 }}>
-                  {name}
+    <div className="interior-page interior-page--dark">
+      <div className="page">
+        <PageHeader label="01 / Projects" title="Things I've contributed to." />
+        <div className="editorial-list">
+          {projects.map(({ number, name, url, urlLabel, contribution, delay }) => (
+            <article className="editorial-row" key={name}>
+              <RevealBlock delay={delay} className="editorial-row-inner">
+                <span className="editorial-number">{number}</span>
+                <div className="editorial-main">
+                  <p className="editorial-kicker">Contributor</p>
+                  <h2><a href={url} target="_blank" rel="noopener noreferrer">{name}<span aria-hidden="true">↗</span></a></h2>
                 </div>
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--soft)', letterSpacing: '0.02em' }}>
-                  {contribution}
-                </p>
-              </div>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="project-link" style={{ flexShrink: 0 }}>
-                {urlLabel}
-              </a>
-            </div>
-          </RevealBlock>
-          <div style={{ height: 1, background: 'var(--border)' }} />
-        </article>
-      ))}
+                <div className="editorial-aside">
+                  <p>{contribution}</p>
+                  <span>{urlLabel}</span>
+                </div>
+              </RevealBlock>
+            </article>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

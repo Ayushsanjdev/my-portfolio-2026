@@ -31,50 +31,24 @@ const jobs = [
 export default function Work() {
   return (
     <div className="page">
-      <PageHeader label="Work Experience" title="Where I've worked." />
-      <div style={{ height: 1, background: 'var(--border)' }} />
-      {jobs.map(({ company, role, location, date, stack, delay }) => (
-        <article key={company}>
-          <RevealBlock delay={delay} style={{ padding: '44px 0' }}>
-            <div style={{
-              display: 'flex', justifyContent: 'space-between',
-              alignItems: 'baseline', gap: 20, marginBottom: 8, flexWrap: 'wrap',
-            }}>
-              <div style={{
-                fontFamily: 'var(--font-disp)',
-                fontSize: 'clamp(28px, 4vw, 42px)',
-                fontWeight: 600, fontStyle: 'italic', color: 'var(--text)',
-                letterSpacing: '-0.02em', lineHeight: 1,
-              }}>
-                {company}
+      <PageHeader label="02 / Experience" title="Where I've worked." />
+      <div className="editorial-list">
+        {jobs.map(({ company, role, location, date, stack, delay }, index) => (
+          <article className="editorial-row editorial-row--work" key={company}>
+            <RevealBlock delay={delay} className="editorial-row-inner">
+              <span className="editorial-number">{String(index + 1).padStart(2, '0')}</span>
+              <div className="editorial-main">
+                <p className="editorial-kicker">{role} / {location}</p>
+                <h2>{company}</h2>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <svg width="6" height="6" aria-hidden="true">
-                  <circle cx="3" cy="3" r="2" fill="rgba(200,241,63,0.5)" />
-                </svg>
-                <time style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)', whiteSpace: 'nowrap' }}>
-                  {date}
-                </time>
+              <div className="editorial-aside">
+                <time>{date}</time>
+                <p className="editorial-stack">{stack.join(' · ')}</p>
               </div>
-            </div>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)', letterSpacing: '0.06em', marginBottom: 20 }}>
-              {role} &nbsp;·&nbsp; {location}
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {stack.map(tech => (
-                <span key={tech} style={{
-                  fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--soft)',
-                  border: '1px solid var(--border)', borderRadius: 4,
-                  padding: '4px 10px', letterSpacing: '0.04em',
-                }}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </RevealBlock>
-          <div style={{ height: 1, background: 'var(--border)' }} />
-        </article>
-      ))}
+            </RevealBlock>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }
