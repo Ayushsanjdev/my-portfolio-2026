@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import HomeMotion from "@/components/HomeMotion";
+import ProjectPreview from "@/components/ProjectPreview";
 
 const contributions = [
   {
@@ -9,6 +11,7 @@ const contributions = [
     detail: "Dynamic form system and API integration",
     url: "https://evaltech.ai",
     domain: "evaltech.ai",
+    slug: "evaltech",
   },
   {
     number: "02",
@@ -17,6 +20,7 @@ const contributions = [
     detail: "API driven location autocomplete",
     url: "https://rsvp.kim",
     domain: "rsvp.kim",
+    slug: "rsvp",
   },
 ];
 
@@ -28,16 +32,16 @@ const experience = [
 
 export default function Home() {
   return (
-    <div className="home-page">
+    <HomeMotion>
       <section className="home-hero" aria-labelledby="home-title">
         <div className="home-hero-top">
           <p>Frontend engineer <span aria-hidden="true">/</span> Patna, India</p>
-          <p>Portfolio <span aria-hidden="true">/</span> 2026</p>
+          <p>Self-taught <span aria-hidden="true">/</span> Still curious</p>
         </div>
 
         <h1 className="home-name" id="home-title">
-          <span>Ayush</span>
-          <span>Sanj<span className="name-period">.</span></span>
+          <span className="name-line"><span className="name-line-text">Ayush</span></span>
+          <span className="name-line"><span className="name-line-text">Sanj<span className="name-period">.</span></span></span>
         </h1>
 
         <div className="home-hero-bottom">
@@ -47,6 +51,7 @@ export default function Home() {
               React, TypeScript, and React Native. I work on product interfaces,
               the interactions inside them, and the details that make them feel right.
             </p>
+            <p className="home-personal">An arts degree. A lot of curiosity.<br />A career built in the browser.</p>
             <a href="#selected-work">Selected work <span aria-hidden="true">↘</span></a>
           </div>
           <div className="home-portrait" aria-hidden="true">
@@ -72,20 +77,25 @@ export default function Home() {
 
           <div className="work-list">
             {contributions.map((project) => (
-              <article className="work-row" key={project.number}>
+              <article className="work-row work-row--preview" key={project.number}>
                 <span className="work-number">{project.number}</span>
                 <div className="work-primary">
                   <span className="work-category">{project.category}</span>
                   <h3>
                     <a href={project.url} target="_blank" rel="noopener noreferrer">
-                      {project.name}<span aria-hidden="true">↗</span>
+                      <span className="project-name-roll">
+                        <span className="project-name-original">{project.name}</span>
+                        <span className="project-name-copy" aria-hidden="true">{project.name}</span>
+                      </span>
+                      <span className="work-arrow" aria-hidden="true">↗</span>
                     </a>
                   </h3>
+                  <div className="work-contribution">
+                    <p>{project.detail}</p>
+                    <span>{project.domain}</span>
+                  </div>
                 </div>
-                <div className="work-secondary">
-                  <p>{project.detail}</p>
-                  <span>{project.domain}</span>
-                </div>
+                <ProjectPreview name={project.name} slug={project.slug} />
               </article>
             ))}
           </div>
@@ -118,6 +128,6 @@ export default function Home() {
         <h2 id="contact-title">Let’s make the<br />interface feel right.</h2>
         <a href="mailto:ayushsanjpro@gmail.com">ayushsanjpro@gmail.com <span aria-hidden="true">↗</span></a>
       </section>
-    </div>
+    </HomeMotion>
   );
 }

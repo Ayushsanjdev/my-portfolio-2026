@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "/projects", label: "Projects" },
@@ -15,6 +15,41 @@ const links = [
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const markerRef = useRef<HTMLSpanElement>(null);
+
+  function moveMarker(link: HTMLElement | null) {
+    const marker = markerRef.current;
+    if (!marker) return;
+    if (!link) {
+      marker.style.opacity = "0";
+      return;
+    }
+    marker.style.transform = `translateX(${link.offsetLeft}px) scaleX(${link.offsetWidth})`;
+    marker.style.opacity = "1";
+  }
+
+  function restoreMarker() {
+    const container = linksRef.current;
+    if (!container) return;
+    const focused = container.contains(document.activeElement)
+      ? document.activeElement as HTMLElement : null;
+    moveMarker(focused ?? container.querySelector('[aria-current="page"]'));
+  }
+
+  useEffect(() => {
+    const container = linksRef.current;
+    if (!container) return;
+    const restore = () => {
+      const focused = container.contains(document.activeElement)
+        ? document.activeElement as HTMLElement : null;
+      moveMarker(focused ?? container.querySelector('[aria-current="page"]'));
+    };
+    restore();
+    const observer = new ResizeObserver(restore);
+    container.querySelectorAll('a').forEach((link) => observer.observe(link));
+    return () => observer.disconnect();
+  }, [pathname]);
 
   return (
     <header className="site-nav">
@@ -23,7 +58,23 @@ export default function Nav() {
           ayush<span>.</span>sanj
         </Link>
         <span className="site-nav-descriptor">Frontend engineer / India</span>
-        <div className="site-nav-links">
+        <div
+          className="site-nav-links"
+          ref={linksRef}
+          onPointerOver={(event) => {
+            if (event.pointerType === "touch") return;
+            const link = (event.target as HTMLElement).closest("a");
+            if (link) moveMarker(link);
+          }}
+          onPointerLeave={restoreMarker}
+          onFocusCapture={(event) => moveMarker(event.target.closest("a"))}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              moveMarker(event.currentTarget.querySelector('[aria-current="page"]'));
+            }
+          }}
+        >
+          <span className="site-nav-marker" aria-hidden="true" ref={markerRef} />
           {links.map(({ href, label }) => (
             <Link key={href} href={href} aria-current={pathname === href ? "page" : undefined}>
               {label}

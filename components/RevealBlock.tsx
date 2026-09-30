@@ -1,10 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   children: React.ReactNode;
@@ -17,28 +13,33 @@ export default function RevealBlock({ children, delay = 0, className, style }: P
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ref.current,
-        { y: 32, opacity: 0 },
-        {
-          y: 0, opacity: 1,
-          duration: reduced ? 0 : 0.7,
-          delay: reduced ? 0 : delay,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 88%',
-            once: true,
-          },
-        }
-      );
-    }, ref);
-
-    return () => ctx.revert();
+    const element = ref.current;
+    if (!element || !('IntersectionObserver' in window)) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animation: Animation | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      if (media.matches) return;
+      animation = element.animate([
+        { opacity: 0.65, transform: 'translateY(12px)' },
+        { opacity: 1, transform: 'translateY(0)' },
+      ], {
+        duration: 450,
+        delay: Math.min(Math.max(delay, 0), 0.15) * 1000,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    const onPreferenceChange = () => {
+      if (media.matches) animation?.cancel();
+    };
+    observer.observe(element);
+    media.addEventListener('change', onPreferenceChange);
+    return () => {
+      observer.disconnect();
+      animation?.cancel();
+      media.removeEventListener('change', onPreferenceChange);
+    };
   }, [delay]);
 
   return (
