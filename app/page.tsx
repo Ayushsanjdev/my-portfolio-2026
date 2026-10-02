@@ -35,7 +35,7 @@ export default function Home() {
     <HomeMotion>
       <section className="home-hero" aria-labelledby="home-title">
         <div className="home-hero-top">
-          <p>Software Engineer · Frontend Focus <span aria-hidden="true">/</span> Patna, India</p>
+          <p>Software Engineer · Frontend <span aria-hidden="true">/</span> Patna, India</p>
           <p>Self-taught <span aria-hidden="true">/</span> Still curious</p>
         </div>
 
@@ -48,9 +48,9 @@ export default function Home() {
           <p className="home-thesis">I build the part<br />you use.</p>
           <div className="home-intro">
             <p>
-              Software engineer focused on building polished, responsive web and mobile
-              experiences with React, TypeScript, and React Native, with growing
-              experience in backend development.
+              Software engineer with 4+ years of experience specializing in responsive
+              web and mobile experiences with React, TypeScript, and React Native,
+              while expanding into backend development.
             </p>
             <p className="home-personal">An arts degree. A lot of curiosity.<br />A career built in the browser.</p>
             <a href="#selected-work">Selected work <span aria-hidden="true">↘</span></a>

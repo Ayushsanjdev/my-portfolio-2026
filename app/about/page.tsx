@@ -18,7 +18,7 @@ export default function About() {
         <RevealBlock delay={0.05}>
           <div className="about-story">
           <p>
-            I&apos;m a software engineer with a frontend focus and <strong style={{ color: 'var(--text)', fontWeight: 600 }}>3+ years</strong> at startups — agritech, fitness, telecom, recruitment. Owning the frontend end-to-end: <strong style={{ color: 'var(--text)', fontWeight: 600 }}>React, React Native, TypeScript</strong>. UI components, pixel precision, performance, responsiveness. The things that make an interface feel right rather than just work.
+            I&apos;m a software engineer with a frontend focus and <strong style={{ color: 'var(--text)', fontWeight: 600 }}>4+ years of experience</strong> at startups — agritech, fitness, telecom, recruitment. Owning the frontend end-to-end: <strong style={{ color: 'var(--text)', fontWeight: 600 }}>React, React Native, TypeScript</strong>. UI components, pixel precision, performance, responsiveness. The things that make an interface feel right rather than just work.
           </p>
           <p>
             That&apos;s where I am. How I got here is less conventional. I grew up in <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Patna, Bihar</strong> with a childhood pull toward computers — but ended up with a <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Bachelor&apos;s in Arts</strong>, not Computer Science. No formal training. Just curiosity, the internet, and the kind of communities where you learn by doing. I taught myself, showed up, stayed consistent, and eventually turned that into my first internship — then a full-time role.
