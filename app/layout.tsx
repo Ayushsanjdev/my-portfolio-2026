@@ -19,21 +19,21 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Ayush Sanj — Frontend Engineer',
-  description: 'Ayush Sanj is a frontend engineer building product interfaces with React, TypeScript, and React Native.',
+  title: 'Ayush Sanj — Software Engineer · Frontend Focus',
+  description: 'Ayush Sanj is a software engineer focused on polished, responsive web and mobile experiences with React, TypeScript, and React Native, with growing experience in backend development.',
   icons: { icon: '/icon.svg' },
   metadataBase: new URL('https://ayushsanj.com'),
   openGraph: {
-    title: 'Ayush Sanj — Frontend Engineer',
-    description: 'Ayush Sanj is a frontend engineer building product interfaces with React, TypeScript, and React Native.',
+    title: 'Ayush Sanj — Software Engineer · Frontend Focus',
+    description: 'Ayush Sanj is a software engineer focused on polished, responsive web and mobile experiences with React, TypeScript, and React Native, with growing experience in backend development.',
     url: 'https://ayushsanj.com',
     siteName: 'Ayush Sanj',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ayush Sanj — Frontend Engineer',
-    description: 'Ayush Sanj is a frontend engineer building product interfaces with React, TypeScript, and React Native.',
+    title: 'Ayush Sanj — Software Engineer · Frontend Focus',
+    description: 'Ayush Sanj is a software engineer focused on polished, responsive web and mobile experiences with React, TypeScript, and React Native, with growing experience in backend development.',
   },
 };
 

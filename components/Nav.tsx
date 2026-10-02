@@ -57,7 +57,7 @@ export default function Nav() {
         <Link className="site-brand" href="/" onClick={() => setOpen(false)} aria-label="Ayush Sanj, home">
           ayush<span>.</span>sanj
         </Link>
-        <span className="site-nav-descriptor">Frontend engineer / India</span>
+        <span className="site-nav-descriptor">Software Engineer · Frontend Focus</span>
         <div
           className="site-nav-links"
           ref={linksRef}

@@ -87,7 +87,7 @@ export default function Resume() {
         <div>
           <h1 className="resume-name">Ayush Sanj<span>.</span></h1>
           <div style={{ fontSize: 16, color: 'var(--soft)' }}>
-            Frontend &amp; Mobile Engineer
+            Software Engineer · Frontend Focus
           </div>
         </div>
         <PrintButton />
@@ -121,7 +121,7 @@ export default function Resume() {
       <div style={{ marginBottom: 40, animation: 'fadeUp 0.5s ease 0.25s both' }}>
         <SectionHead>Summary</SectionHead>
         <p style={{ fontSize: 15, color: 'var(--soft)', lineHeight: 1.8 }}>
-          Frontend and Mobile Engineer with 3+ years building production-grade interfaces across agritech, fitness, telecom, and recruitment. Specialized in React, React Native, and TypeScript — from pixel-perfect landing pages and complex data dashboards to cross-platform mobile apps shipped on both stores. Proven track record of owning entire frontend slices end-to-end, from architecture to deployment.
+          Software engineer with a frontend focus and 3+ years building production-grade interfaces across agritech, fitness, telecom, and recruitment. Specialized in React, React Native, and TypeScript — from pixel-perfect landing pages and complex data dashboards to cross-platform mobile apps shipped on both stores. Proven track record of owning entire frontend slices end-to-end, from architecture to deployment, with growing experience in backend development.
         </p>
       </div>
 

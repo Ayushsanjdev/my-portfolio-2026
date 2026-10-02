@@ -14,17 +14,17 @@ export default function About() {
     <div className="page">
       <PageHeader label="03 / About" title="Who I am." />
       <div className="about-layout">
-        <p className="about-lead">A frontend engineer who cares how the whole product feels<span>.</span></p>
+        <p className="about-lead">A software engineer with a frontend focus who cares how the whole product feels<span>.</span></p>
         <RevealBlock delay={0.05}>
           <div className="about-story">
           <p>
-            I&apos;m a frontend engineer with <strong style={{ color: 'var(--text)', fontWeight: 600 }}>3+ years</strong> at startups — agritech, fitness, telecom, recruitment. Owning the frontend end-to-end: <strong style={{ color: 'var(--text)', fontWeight: 600 }}>React, React Native, TypeScript</strong>. UI components, pixel precision, performance, responsiveness. The things that make an interface feel right rather than just work.
+            I&apos;m a software engineer with a frontend focus and <strong style={{ color: 'var(--text)', fontWeight: 600 }}>3+ years</strong> at startups — agritech, fitness, telecom, recruitment. Owning the frontend end-to-end: <strong style={{ color: 'var(--text)', fontWeight: 600 }}>React, React Native, TypeScript</strong>. UI components, pixel precision, performance, responsiveness. The things that make an interface feel right rather than just work.
           </p>
           <p>
             That&apos;s where I am. How I got here is less conventional. I grew up in <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Patna, Bihar</strong> with a childhood pull toward computers — but ended up with a <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Bachelor&apos;s in Arts</strong>, not Computer Science. No formal training. Just curiosity, the internet, and the kind of communities where you learn by doing. I taught myself, showed up, stayed consistent, and eventually turned that into my first internship — then a full-time role.
           </p>
           <p>
-            I want to be a <strong style={{ color: 'var(--text)', fontWeight: 600 }}>frontend engineer for life</strong> — building products that make things genuinely easier for people, and that other developers actually enjoy working with. That&apos;s the long game. Outside of screens: I&apos;m at the gym every day, always up for a coffee run, and at my best when I&apos;m out with friends catching a film or just going somewhere new.
+            I want to be a <strong style={{ color: 'var(--text)', fontWeight: 600 }}>software engineer</strong> — building products that make things genuinely easier for people, and that other developers actually enjoy working with. Frontend is my strongest area, and I&apos;m growing my experience in backend development. That&apos;s the long game. Outside of screens: I&apos;m at the gym every day, always up for a coffee run, and at my best when I&apos;m out with friends catching a film or just going somewhere new.
           </p>
           </div>
         </RevealBlock>
