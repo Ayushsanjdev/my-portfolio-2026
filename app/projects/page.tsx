@@ -1,5 +1,9 @@
 import PageHeader from '@/components/PageHeader';
 import RevealBlock from '@/components/RevealBlock';
+import GitHubProjects from '@/components/GitHubProjects';
+import { getGitHubProjects } from '@/lib/github';
+
+export const revalidate = 3600;
 
 const projects = [
   {
@@ -20,11 +24,12 @@ const projects = [
   },
 ];
 
-export default function Projects() {
+export default async function Projects() {
+  const { projects: githubProjects, fetchedAt } = await getGitHubProjects();
   return (
     <div className="interior-page interior-page--dark">
       <div className="page">
-        <PageHeader label="01 / Projects" title="Things I've contributed to." />
+        <PageHeader label="01 / Projects" title="Things I've built & contributed to." />
         <div className="editorial-list">
           {projects.map(({ number, name, url, urlLabel, contribution, delay }) => (
             <article className="editorial-row" key={name}>
@@ -42,6 +47,7 @@ export default function Projects() {
             </article>
           ))}
         </div>
+        <GitHubProjects projects={githubProjects} fetchedAt={fetchedAt} />
       </div>
     </div>
   );

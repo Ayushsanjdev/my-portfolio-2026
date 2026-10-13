@@ -1,28 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import HomeMotion from "@/components/HomeMotion";
-import ProjectPreview from "@/components/ProjectPreview";
+import { getGitHubProjects } from "@/lib/github";
+import { isRecentlyActive, safeHomepage } from "@/lib/github-projects";
 
-const contributions = [
-  {
-    number: "01",
-    name: "Evaltech",
-    category: "Product interface",
-    detail: "Dynamic form system and API integration",
-    url: "https://evaltech.ai",
-    domain: "evaltech.ai",
-    slug: "evaltech",
-  },
-  {
-    number: "02",
-    name: "RSVP",
-    category: "Interaction detail",
-    detail: "API driven location autocomplete",
-    url: "https://rsvp.kim",
-    domain: "rsvp.kim",
-    slug: "rsvp",
-  },
-];
+export const revalidate = 3600;
 
 const experience = [
   { company: "Kraftbase", role: "Software Engineer", period: "2025 — 2026" },
@@ -30,7 +12,33 @@ const experience = [
   { company: "Team Geek Solutions", role: "Software Developer", period: "2021 — 2024" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { projects, fetchedAt } = await getGitHubProjects();
+  const selectedProjects = [
+    {
+      name: "RSVP",
+      category: "Contributor",
+      detail: "API-driven location autocomplete for a live product.",
+      url: "https://rsvp.kim",
+      demo: null,
+      language: null,
+      pushedAt: null,
+      recentlyActive: false,
+    },
+    ...["my-portfolio-2026", "frontlanejobs", "saathi-rides-lite"].flatMap(name => {
+      const project = projects?.find(project => project.name.toLowerCase() === name);
+      return project ? [project] : [];
+    }).map(project => ({
+      name: project.name,
+      category: "Personal project",
+      detail: project.description,
+      url: project.html_url,
+      demo: safeHomepage(project.homepage),
+      language: project.language,
+      pushedAt: project.pushed_at,
+      recentlyActive: isRecentlyActive(project.pushed_at, fetchedAt),
+    })),
+  ];
   return (
     <HomeMotion>
       <section className="home-hero" aria-labelledby="home-title">
@@ -72,14 +80,14 @@ export default function Home() {
         <div className="work-index-inner">
           <div className="work-index-heading">
             <p className="section-index">01 / Work</p>
-            <h2 id="work-title">Selected contributions<span className="index-period">.</span></h2>
-            <p>A form system and a location search, built for live products.</p>
+            <h2 id="work-title">Selected projects<span className="index-period">.</span></h2>
+            <p>My latest active builds and work on live products.</p>
           </div>
 
           <div className="work-list">
-            {contributions.map((project) => (
-              <article className="work-row work-row--preview" key={project.number}>
-                <span className="work-number">{project.number}</span>
+            {selectedProjects.map((project, index) => (
+              <article className="work-row work-row--selected" key={project.url}>
+                <span className="work-number">{String(index + 1).padStart(2, "0")}</span>
                 <div className="work-primary">
                   <span className="work-category">{project.category}</span>
                   <h3>
@@ -93,14 +101,21 @@ export default function Home() {
                   </h3>
                   <div className="work-contribution">
                     <p>{project.detail}</p>
-                    <span>{project.domain}</span>
+                    {project.language && <span>{project.language}</span>}
                   </div>
                 </div>
-                <ProjectPreview name={project.name} slug={project.slug} />
+                <div className="selected-project-aside">
+                  {project.pushedAt && <p className="selected-project-activity">{project.recentlyActive && <>Recently active<br /></>}<time dateTime={project.pushedAt}>Last push {new Date(project.pushedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })}</time></p>}
+                  <div className="selected-project-links">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name}${project.pushedAt ? ' on GitHub' : ''}`}>{project.pushedAt ? 'Code' : 'Visit site'} ↗</a>
+                    {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} live demo`}>Live demo ↗</a>}
+                  </div>
+                </div>
               </article>
             ))}
           </div>
 
+          {projects === null && <p className="selected-project-fallback">GitHub projects couldn’t be loaded right now. <a href="https://github.com/ayushsanjdev?tab=repositories" target="_blank" rel="noopener noreferrer">Browse them on GitHub ↗</a></p>}
           <Link className="work-more" href="/projects">All projects <span aria-hidden="true">↗</span></Link>
         </div>
       </section>

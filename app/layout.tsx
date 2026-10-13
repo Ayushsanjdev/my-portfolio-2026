@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, DM_Mono } from 'next/font/google';
 import './globals.css';
+import 'lenis/dist/lenis.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${bricolageGrotesque.variable} ${dmMono.variable}`}>
       <body>
+        <SmoothScroll />
         <Nav />
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <main style={{ flex: 1 }}>{children}</main>

@@ -5,26 +5,32 @@ import Lenis from 'lenis';
 
 export default function SmoothScroll() {
   useEffect(() => {
-    // Skip on touch devices — native momentum scroll is better there
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const hover = window.matchMedia('(hover: hover)');
+    let lenis: Lenis | undefined;
 
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => 1 - Math.pow(1 - t, 4), // ease-out-quart
-      smoothWheel: true,
-      touchMultiplier: 0, // no Lenis on touch
-    });
-
-    let raf: number;
-    const tick = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(tick);
+    const syncPreferences = () => {
+      lenis?.destroy();
+      lenis = undefined;
+      // Keep native momentum on touch devices and honor motion preferences.
+      if (reducedMotion.matches || !hover.matches) return;
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+        smoothWheel: true,
+        autoRaf: true,
+        anchors: true,
+      });
     };
-    raf = requestAnimationFrame(tick);
+
+    syncPreferences();
+    reducedMotion.addEventListener('change', syncPreferences);
+    hover.addEventListener('change', syncPreferences);
 
     return () => {
-      cancelAnimationFrame(raf);
-      lenis.destroy();
+      reducedMotion.removeEventListener('change', syncPreferences);
+      hover.removeEventListener('change', syncPreferences);
+      lenis?.destroy();
     };
   }, []);
 
