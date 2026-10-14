@@ -27,7 +27,7 @@ Public repositories work without credentials. Optionally set `GITHUB_TOKEN` in `
 
 Run the project-data tests with `node --test tests/github-projects.test.mjs` (Node.js 22.18+).
 
-Lenis smooths desktop wheel scrolling and in-page anchor links site-wide. Touch devices retain native momentum, and reduced-motion preferences disable scroll animation.
+The site uses native browser scrolling, with CSS smooth scrolling for in-page anchor links. Reduced-motion preferences disable scroll animation.
 
 ## License
 

@@ -24,7 +24,6 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
-html.lenis-smooth { scroll-behavior: auto; }
 
 body {
   min-height: 100vh;
