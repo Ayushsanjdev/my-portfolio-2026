@@ -7,9 +7,10 @@ export default function GitHubProjects({ projects, fetchedAt }: { projects: GitH
   const [query, setQuery] = useState('');
   const [activeOnly, setActiveOnly] = useState(false);
   const [limit, setLimit] = useState(12);
-  const all = projects || [];
+  const all = (projects || []).filter(project => project.name.toLowerCase() !== 'saathi-rides-lite');
+  const ordered = [...all].sort((a, b) => Number(b.name.toLowerCase() === 'frontlanejobs') - Number(a.name.toLowerCase() === 'frontlanejobs'));
   const activeCount = all.filter(p => isRecentlyActive(p.pushed_at, fetchedAt)).length;
-  const filtered = searchProjects(all, query).filter(p => !activeOnly || isRecentlyActive(p.pushed_at, fetchedAt));
+  const filtered = searchProjects(ordered, query).filter(p => !activeOnly || isRecentlyActive(p.pushed_at, fetchedAt));
 
   return (
     <section className="github-projects" aria-labelledby="github-heading">
@@ -28,7 +29,7 @@ export default function GitHubProjects({ projects, fetchedAt }: { projects: GitH
             </div>
             <label className="github-search"><span className="github-sr-only">Search GitHub projects</span><input type="search" placeholder="Search projects…" value={query} onChange={e => { setQuery(e.target.value); setLimit(12); }} /></label>
           </div>
-          <p className="github-activity-note">Newest pushes first. Recently active = a push in the last 90 days.</p>
+          <p className="github-activity-note">FrontlaneJobs first, then newest pushes. Recently active = a push in the last 90 days.</p>
           <div className="github-list">
             {filtered.slice(0, limit).map(project => {
               const active = isRecentlyActive(project.pushed_at, fetchedAt);

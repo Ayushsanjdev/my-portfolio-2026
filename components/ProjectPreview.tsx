@@ -15,7 +15,7 @@ export default function ProjectPreview({ name, slug }: { name: string; slug: str
           <strong>{name}<span>↗</span></strong>
         </div>
         <div className="preview-desktop">
-          <div className="preview-browser" aria-hidden="true"><i /><i /><i /><span>{slug === "evaltech" ? "evaltech.ai" : "rsvp.kim"}</span></div>
+          <div className="preview-browser" aria-hidden="true"><i /><i /><i /><span>{({ evaltech: "evaltech.ai", rsvp: "rsvp.kim", frontlanejobs: "frontlanejobs.vercel.app", portfolio: "ayushsanj.com" } as Record<string, string>)[slug]}</span></div>
           <Image src={`/projects/${slug}.webp`} alt={`${name} public homepage on desktop`} width={1280} height={900} sizes="(max-width: 760px) 260px, 340px" />
         </div>
         <div className="preview-mobile">

@@ -212,13 +212,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* The home page is an index sheet: name first, work as full-width entries. */
 
-.home-hero { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: min(890px, 100svh); overflow: hidden; padding: calc(var(--nav-h) + 42px) var(--pad) 56px; }
+.home-hero { position: relative; display: flex; flex-direction: column; gap: clamp(40px, 4vw, 64px); min-height: min(890px, 100svh); overflow: hidden; padding: calc(var(--nav-h) + 42px) var(--pad) 56px; }
 .home-hero::before { content: ""; position: absolute; top: var(--nav-h); bottom: 0; left: 52%; width: 1px; background: rgba(34, 32, 61, 0.07); pointer-events: none; }
 .home-hero-top, .home-hero-bottom { position: relative; z-index: 3; width: min(100%, calc(var(--max) - 2 * var(--pad))); margin: 0 auto; }
 .home-hero-top { display: flex; justify-content: space-between; gap: 20px; }
 .home-hero-top p { margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; }
 .home-hero-top p span { padding: 0 8px; color: var(--accent); }
-.home-name { position: relative; z-index: 2; width: min(100%, calc(var(--max) - 2 * var(--pad))); margin: 32px auto 0; font-size: clamp(112px, 14.7vw, 212px); font-weight: 600; letter-spacing: -0.105em; line-height: 0.74; text-transform: uppercase; }
+.home-name { position: relative; z-index: 2; width: min(100%, calc(var(--max) - 2 * var(--pad))); margin: 0 auto; font-size: clamp(112px, 14.7vw, 212px); font-weight: 600; letter-spacing: -0.105em; line-height: 0.74; text-transform: uppercase; }
 .home-name > span { display: block; }
 .name-line { clip-path: inset(-0.18em -0.15em -0.18em -0.15em); }
 .name-line-text { display: block; }
@@ -226,7 +226,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .name-period { color: var(--accent); }
 .home-portrait { width: var(--portrait-size); aspect-ratio: 1; overflow: hidden; border-radius: 50%; background: #000; pointer-events: none; }
 .home-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.home-hero-bottom { --portrait-size: clamp(132px, 12.25vw, 176px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 330px) var(--portrait-size); align-items: end; gap: clamp(28px, 5vw, 72px); }
+.home-hero-bottom { --portrait-size: clamp(132px, 12.25vw, 176px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 330px) var(--portrait-size); align-items: start; gap: clamp(28px, 5vw, 72px); }
 .home-thesis { margin: 0; font-size: clamp(30px, 3.7vw, 50px); font-weight: 500; letter-spacing: -0.065em; line-height: 1.04; }
 .home-intro p { max-width: 340px; margin: 0 0 25px; color: var(--soft); font-size: 14px; line-height: 1.65; }
 .home-intro a { display: inline-flex; gap: 36px; align-items: center; padding-bottom: 7px; border-bottom: 1px solid var(--text); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
@@ -281,7 +281,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* Product previews unfold like a small collection of browser windows. */
 .home-intro p.home-personal { font-size: 12px; color: var(--text); margin-bottom: 22px; line-height: 1.5; }
-.work-row.work-row--preview { grid-template-columns: 80px minmax(250px, 1fr) minmax(340px, 0.9fr); gap: 32px; min-height: 360px; padding: 48px 0; }
+.work-row.work-row--preview { grid-template-columns: 60px minmax(250px, 1fr) minmax(340px, 0.9fr); gap: 32px; min-height: 360px; padding: 48px 0; }
 .work-contribution { margin-top: 24px; }
 .work-contribution p { max-width: 280px; margin: 0 0 12px; color: #cbc7db; font-size: 14px; line-height: 1.5; }
 .work-contribution > span { color: #aaa7c4; font-family: var(--font-mono); font-size: 11px; }
@@ -467,4 +467,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   .work-primary h3 a:is(:hover, :focus-visible) .project-name-original { transform: none; }
   .work-primary h3 a:is(:hover, :focus-visible) .work-arrow { transform: none; }
   .preview-note, .preview-desktop, .preview-mobile { transition: none; }
+}
+
+/* Keep project details and their screenshots together at every width. */
+.work-row--selected.work-row--preview .work-primary { grid-column: 2; grid-row: 1; }
+.work-row--selected.work-row--preview .selected-project-aside { grid-column: 2; grid-row: 2; align-self: start; }
+.work-row--selected.work-row--preview .project-preview { grid-column: 3; grid-row: 1 / 3; }
+.editorial-row--preview .editorial-row-inner { grid-template-columns: 60px minmax(0, 1fr) minmax(300px, 430px); gap: 24px 32px; }
+.editorial-row--preview .editorial-aside { grid-column: 2; grid-row: 2; }
+.editorial-row--preview .project-preview { grid-column: 3; grid-row: 1 / 3; }
+@media (max-width: 760px) {
+  .home-hero { gap: 0; }
+  .work-row--selected.work-row--preview .project-preview { grid-column: 2; grid-row: 3; }
+  .editorial-row--preview .editorial-row-inner { grid-template-columns: 26px minmax(0, 1fr); gap: 20px; }
+  .editorial-row--preview .project-preview { grid-column: 2; grid-row: 3; justify-self: start; max-width: 360px; }
 }

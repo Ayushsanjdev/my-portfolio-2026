@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProjectPreview from "@/components/ProjectPreview";
 import HomeMotion from "@/components/HomeMotion";
 import { getGitHubProjects } from "@/lib/github";
 import { isRecentlyActive, safeHomepage } from "@/lib/github-projects";
@@ -16,6 +17,18 @@ export default async function Home() {
   const { projects, fetchedAt } = await getGitHubProjects();
   const selectedProjects = [
     {
+      name: "FrontlaneJobs",
+      category: "Personal project",
+      detail: "Frontend job discovery and a private application tracker, built for your next move.",
+      url: "https://github.com/Ayushsanjdev/frontlanejobs",
+      demo: "https://frontlanejobs.vercel.app",
+      language: "JavaScript",
+      pushedAt: projects?.find(project => project.name.toLowerCase() === "frontlanejobs")?.pushed_at ?? null,
+      recentlyActive: false,
+      preview: "frontlanejobs",
+    },
+    {
+      preview: "rsvp",
       name: "RSVP",
       category: "Contributor",
       detail: "API-driven location autocomplete for a live product.",
@@ -25,10 +38,11 @@ export default async function Home() {
       pushedAt: null,
       recentlyActive: false,
     },
-    ...["my-portfolio-2026", "frontlanejobs", "saathi-rides-lite"].flatMap(name => {
+    ...["my-portfolio-2026"].flatMap(name => {
       const project = projects?.find(project => project.name.toLowerCase() === name);
       return project ? [project] : [];
     }).map(project => ({
+      preview: "portfolio",
       name: project.name,
       category: "Personal project",
       detail: project.description,
@@ -86,7 +100,7 @@ export default async function Home() {
 
           <div className="work-list">
             {selectedProjects.map((project, index) => (
-              <article className="work-row work-row--selected" key={project.url}>
+              <article className="work-row work-row--selected work-row--preview" key={project.url}>
                 <span className="work-number">{String(index + 1).padStart(2, "0")}</span>
                 <div className="work-primary">
                   <span className="work-category">{project.category}</span>
@@ -111,6 +125,7 @@ export default async function Home() {
                     {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} live demo`}>Live demo ↗</a>}
                   </div>
                 </div>
+                <ProjectPreview name={project.name} slug={project.preview} />
               </article>
             ))}
           </div>
